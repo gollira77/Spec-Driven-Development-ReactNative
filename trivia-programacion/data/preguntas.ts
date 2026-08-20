@@ -1,27 +1,25 @@
 export interface Pregunta {
   id: string;
+  lenguajeId: string;
   pregunta: string;
   opciones: string[];
-  correcta: number;
+  respuestaCorrecta: number;
 }
 
-export const preguntas: Pregunta[] = [
+export const PREGUNTAS_BASE: Pregunta[] = [
   {
-    id: "1",
-    pregunta: "¿Qué lenguaje utiliza React Native?",
-    opciones: ["JavaScript", "HTML", "SQL", "CSS"],
-    correcta: 0
+    id: '1',
+    lenguajeId: 'javascript',
+    pregunta: '¿Qué método agrega elementos al final de un arreglo?',
+    opciones: ['.push()', '.pop()', '.shift()', '.unshift()'],
+    respuestaCorrecta: 0,
   },
   {
-    id: "2",
-    pregunta: "¿Cuál posee sintaxis sencilla?",
-    opciones: ["Python", "Assembly", "C", "Fortran"],
-    correcta: 0
+    id: '2',
+    lenguajeId: 'python',
+    pregunta: '¿Qué palabra clave se usa para definir una función en Python?',
+    opciones: ['function', 'def', 'func', 'lambda'],
+    respuestaCorrecta: 1,
   },
-  {
-    id: "3",
-    pregunta: "¿Cuál pertenece a .NET?",
-    opciones: ["C#", "Ruby", "PHP", "Go"],
-    correcta: 0
-  }
+  // Agrega tus demás preguntas aquí usando sus respectivos lenguajeId...
 ];

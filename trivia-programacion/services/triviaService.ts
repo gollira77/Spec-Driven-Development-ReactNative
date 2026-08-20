@@ -1,26 +1,41 @@
-import { lenguajes, Lenguaje } from "../data/lenguajes";
-import { preguntas, Pregunta } from "../data/preguntas";
+import { PREGUNTAS_BASE, Pregunta } from '../data/preguntas';
+import { storageService } from './storageService';
 
-function esperar(): Promise<void> {
-  const tiempo = 500 + Math.random() * 500;
+// Función para simular la latencia de red (RNF-01)
+const esperar = (ms: number = 600) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  return new Promise((resolve) => {
-    setTimeout(resolve, tiempo);
-  });
-}
+export const triviaService = {
+  // 1. Obtener TODAS las preguntas (Base + AsyncStorage)
+  obtenerTodasLasPreguntas: async (): Promise<Pregunta[]> => {
+    await esperar();
+    try {
+      const preguntasUsuario = await storageService.obtenerPreguntas();
+      // Unificamos las preguntas fijas del juego con las creadas por el usuario
+      return [...PREGUNTAS_BASE, ...preguntasUsuario];
+    } catch (error) {
+      console.error('Error al cargar preguntas:', error);
+      return PREGUNTAS_BASE;
+    }
+  },
 
-export async function obtenerLenguajes(): Promise<Lenguaje[]> {
-  await esperar();
-  return lenguajes;
-}
+  // 2. Obtener preguntas filtradas por una categoría/lenguaje específico
+  obtenerPreguntasPorLenguaje: async (lenguajeId: string): Promise<Pregunta[]> => {
+    await esperar();
+    const todas = await triviaService.obtenerTodasLasPreguntas();
+    return todas.filter((p) => p.lenguajeId === lenguajeId);
+  },
 
-export async function obtenerPreguntas(): Promise<Pregunta[]> {
-  await esperar();
-  return preguntas;
-}
+  // 3. Obtener UNA pregunta aleatoria según el lenguaje seleccionado por la Ruleta
+  obtenerPreguntaAleatoria: async (lenguajeId: string): Promise<Pregunta | null> => {
+    await esperar();
+    const preguntasCategoria = (await triviaService.obtenerTodasLasPreguntas()).filter(
+      (p) => p.lenguajeId === lenguajeId
+    );
 
-export async function obtenerLenguaje(id: string): Promise<Lenguaje | undefined> {
-  await esperar();
+    if (preguntasCategoria.length === 0) return null;
 
-  return lenguajes.find((item) => item.id === id);
-}
+    // Selección al azar
+    const indiceAleatorio = Math.floor(Math.random() * preguntasCategoria.length);
+    return preguntasCategoria[indiceAleatorio];
+  },
+};

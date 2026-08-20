@@ -1,33 +1,15 @@
 export interface Lenguaje {
   id: string;
   nombre: string;
-  anio: number;
-  descripcion: string;
+  color: string;
+  icono: string;
 }
 
-export const lenguajes: Lenguaje[] = [
-  {
-    id: "javascript",
-    nombre: "JavaScript",
-    anio: 1995,
-    descripcion: "Lenguaje utilizado para desarrollo web y React Native."
-  },
-  {
-    id: "python",
-    nombre: "Python",
-    anio: 1991,
-    descripcion: "Lenguaje conocido por su sintaxis sencilla."
-  },
-  {
-    id: "java",
-    nombre: "Java",
-    anio: 1995,
-    descripcion: "Lenguaje orientado a objetos."
-  },
-  {
-    id: "csharp",
-    nombre: "C#",
-    anio: 2000,
-    descripcion: "Lenguaje utilizado dentro del ecosistema .NET."
-  }
+export const LENGUAJES: Lenguaje[] = [
+  { id: 'javascript', nombre: 'JavaScript', color: '#F7DF1E', icono: 'code-slash' },
+  { id: 'python', nombre: 'Python', color: '#3776AB', icono: 'terminal' },
+  { id: 'react', nombre: 'React / RN', color: '#61DAFB', icono: 'phone-portrait' },
+  { id: 'htmlcss', nombre: 'HTML / CSS', color: '#E34F26', icono: 'logo-css3' },
+  { id: 'backend', nombre: 'Backend / DB', color: '#339933', icono: 'server' },
+  { id: 'git', nombre: 'Git / DevOps', color: '#F05032', icono: 'git-branch' },
 ];
