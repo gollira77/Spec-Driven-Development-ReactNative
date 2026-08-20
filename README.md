@@ -1,4 +1,4 @@
-## Bienvenidos al proyecto SyntaxSpin 
+## Bienvenidos al proyecto DevTrivia 
 
 Es una aplicación móvil tipo "Preguntados" desarrollada con Expo, React Native y TypeScript. Pon a prueba tus conocimientos sobre lenguajes de programación y tecnologías web haciendo girar la ruleta para ganar todos los "quesitos".
 

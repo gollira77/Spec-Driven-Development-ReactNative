@@ -18,3 +18,17 @@
 2. **Componentes Puros:** Los componentes de la carpeta `components/` deben ser reutilizables y recibir sus propiedades vía `props`.
 3. **Manejo de Latencia:** Toda petición a servicios simulados debe usar la función `esperar()` de `triviaService.ts` para mantener la consistencia del RNF.
 4. **Commits:** Mensajes claros con prefijos (`feat:`, `fix:`, `docs:`, `style:`, `refactor:`).
+
+## Chat de fuentes consultadas: 
+```
+- link: https://claude.ai/chat/0185ee98-0e91-4a12-b7a4-9eebbfe86cae
+- servicio: Claude.ia
+- modelo: Sonnet 5 
+- esfuerzo del modelo: Alto
+```
+## Chat de desarrollo de Agentes:
+```
+https://claude.ai/share/4bc2ffbc-8c15-459f-370f-27e803bff7c2
+- servicio: Claude.ia
+- modelo: Opus 4.7 
+- esfuerzo del modelo: Alto
