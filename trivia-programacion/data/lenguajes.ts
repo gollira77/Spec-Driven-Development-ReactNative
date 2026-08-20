@@ -1,4 +1,5 @@
 export interface Lenguaje {
+  descripcion: ReactNode;
   id: string;
   nombre: string;
   color: string;

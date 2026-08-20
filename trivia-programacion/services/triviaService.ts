@@ -1,3 +1,4 @@
+import { Lenguaje, LENGUAJES } from '@/data/lenguajes';
 import { PREGUNTAS_BASE, Pregunta } from '../data/preguntas';
 import { storageService } from './storageService';
 
@@ -37,5 +38,11 @@ export const triviaService = {
     // Selección al azar
     const indiceAleatorio = Math.floor(Math.random() * preguntasCategoria.length);
     return preguntasCategoria[indiceAleatorio];
+  },
+
+  // Obtener la información de un solo lenguaje por su ID
+  obtenerLenguaje: async (id: string): Promise<Lenguaje | undefined> => {
+    await esperar();
+    return LENGUAJES.find((l) => l.id === id);
   },
 };

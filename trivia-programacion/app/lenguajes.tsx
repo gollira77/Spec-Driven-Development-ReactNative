@@ -1,52 +1,55 @@
-import { useEffect, useState } from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
-import { router, Href } from "expo-router";
-import { obtenerLenguajes } from "../services/triviaService.ts";
-import { Lenguaje } from "../data/lenguajes.ts";
+import React from 'react';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { LENGUAJES } from '../data/lenguajes';
 
-export default function Lenguajes() {
-  const [datos, setDatos] = useState<Lenguaje[]>([]);
-  const [cargando, setCargando] = useState<boolean>(true);
-
-  useEffect(() => {
-    cargar();
-  }, []);
-
-  async function cargar() {
-    const respuesta = await obtenerLenguajes();
-    setDatos(respuesta);
-    setCargando(false);
-  }
-
-  if (cargando) {
-    return (
-      <View>
-        <ActivityIndicator size="large" />
-        <Text>Cargando...</Text>
-      </View>
-    );
-  }
-
-  if (datos.length === 0) {
-    return (
-      <View>
-        <Text>No existen lenguajes</Text>
-      </View>
-    );
-  }
-
+export default function LenguajesScreen() {
   return (
-    <FlatList
-      data={datos}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <Text
-          onPress={() => router.push(`/lenguaje/${item.id}` as Href)}
-          style={{ fontSize: 20, padding: 20 }}
-        >
-          {item.nombre}
-        </Text>
-      )}
-    />
+    <View style={styles.contenedor}>
+      <Text style={styles.titulo}>Categorías Disponibles</Text>
+
+      <FlatList
+        data={LENGUAJES}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={[styles.tarjeta, { borderLeftColor: item.color }]}>
+            <View style={[styles.iconoContenedor, { backgroundColor: item.color }]}>
+              <Ionicons name={item.icono as any} size={24} color="#12131C" />
+            </View>
+            <View style={styles.info}>
+              <Text style={styles.nombre}>{item.nombre}</Text>
+              <Text style={styles.descripcion}>Preguntas de {item.nombre}</Text>
+            </View>
+          </View>
+        )}
+      />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  contenedor: { flex: 1, backgroundColor: '#12131C', padding: 20 },
+  titulo: { color: '#FFF', fontSize: 20, fontWeight: 'bold', marginBottom: 20 },
+  tarjeta: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1E202E',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 12,
+    borderLeftWidth: 5,
+    borderWidth: 1,
+    borderColor: '#2A2C3D',
+  },
+  iconoContenedor: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15,
+  },
+  info: { flex: 1 },
+  nombre: { color: '#FFF', fontSize: 16, fontWeight: 'bold' },
+  descripcion: { color: '#A0A5B5', fontSize: 12, marginTop: 2 },
+});
